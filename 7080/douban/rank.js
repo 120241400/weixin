@@ -64,7 +64,7 @@ function loadDbInfo(){
         data:douban,
         success:function(data){
             data.subjects.forEach(function(item){
-                str+=('<div class="item"><a href="https://ys.urlsdh.com/so/api.php?key='+item.title+'" target="_blank"><div class="cover"><img class="item-img lazy unfancybox" referrerpolicy="no-referrer" data-src="'+item.cover+'" /><span class="remark">'+(item.is_new?'<img src="https://img1.doubanio.com/f/movie/caa8f80abecee1fc6f9d31924cef8dd9a24c7227/pics/movie/ic_new.png" width="16" class="new">':'')+item.episodes_info+'</span></div><div class="item-info">'+item.title+'</div></a></div>');
+                str+=('<div class="item"><a href="https://leafy-salmiakki-8e302a.netlify.app/7080/so.html?wd='+item.title+'" target="_blank"><div class="cover"><img class="item-img lazy unfancybox" referrerpolicy="no-referrer" data-src="'+item.cover+'" /><span class="remark">'+(item.is_new?'<img src="https://img1.doubanio.com/f/movie/caa8f80abecee1fc6f9d31924cef8dd9a24c7227/pics/movie/ic_new.png" width="16" class="new">':'')+item.episodes_info+'</span></div><div class="item-info">'+item.title+'</div></a></div>');
             })
             $("#douban .list").html(str);
         }
@@ -86,7 +86,7 @@ function loadBdInfo(){
             $("#baidu .tags").html(str);
             str="";
             items.forEach(function(item){
-                str+=('<div class="item"><a href="https://ys.urlsdh.com/so/api.php?key='+item.word+'" target="_blank"><div class="cover"><img class="item-img lazy unfancybox" referrerpolicy="no-referrer" data-src="'+item.img+'" /><span class="remark">'+('<img width="15" src="https://fe-prod.cdn.bcebos.com/wise/card/img_text_list/hotchange_'+(item.hotChange=='up'?'up.png':item.hotChange=='down'?'down.png':item.hotChange=="same"?'same.png':'')+'"/>')+item.hotScore
+                str+=('<div class="item"><a href="https://leafy-salmiakki-8e302a.netlify.app/7080/so.html?wd='+item.word+'" target="_blank"><div class="cover"><img class="item-img lazy unfancybox" referrerpolicy="no-referrer" data-src="'+item.img+'" /><span class="remark">'+('<img width="15" src="https://fe-prod.cdn.bcebos.com/wise/card/img_text_list/hotchange_'+(item.hotChange=='up'?'up.png':item.hotChange=='down'?'down.png':item.hotChange=="same"?'same.png':'')+'"/>')+item.hotScore
 +'</span></div><div class="item-info">'+item.word+'</div></a></div>');
             })
             $("#baidu .list").html(str);
