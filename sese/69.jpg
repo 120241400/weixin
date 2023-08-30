@@ -78,10 +78,10 @@
       "filterable": 0
     },
     {
-      "key": "精工",
-      "name": "🕺精工资源",
+      "key": "红袖",
+      "name": "🍷红袖资源",
       "type": 0,
-      "api": "https://jgczyapi.com/home/cjapi/kld2/mc10/vod/xml",
+      "api": "https://hongxiuzy.com/api.php/provide/vod/xml",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
