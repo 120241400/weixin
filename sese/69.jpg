@@ -204,6 +204,15 @@
       "filterable": 0
     },
     {
+      "key": "花魁",
+      "name": "🌸花魁资源",
+      "type": 0,
+      "api": "https://caiji.huakuiapi.com/inc/apijson_vod.php",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    },
+    {
       "key": "速度",
       "name": "🚀速度资源",
       "type": 0,
