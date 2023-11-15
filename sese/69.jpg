@@ -14,6 +14,15 @@
     }
   ],
   "sites": [
+   {  
+"key": "速度",
+      "name": "🚀速度资源",
+      "type": 0,
+      "api": "http://www.ggmmzy.com:9999/inc/xml",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    }
     {
       "key": "少女",
       "name": "👧少女资源",
@@ -220,15 +229,6 @@
       "name": "🌸花魁资源",
       "type": 0,
       "api": "https://caiji.huakuiapi.com/inc/api.php",
-      "searchable": 0,
-      "quickSearch": 0,
-      "filterable": 0
-    },
-    {
-      "key": "速度",
-      "name": "🚀速度资源",
-      "type": 0,
-      "api": "http://www.ggmmzy.com:9999/inc/xml",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
