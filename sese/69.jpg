@@ -14,15 +14,6 @@
     }
   ],
   "sites": [
-{
-      "key": "麻豆",
-      "name": "🥜麻豆资源",
-      "type": 0,
-      "api": "https://91md.me/api.php/provide/vod",
-      "searchable": 0,
-      "quickSearch": 0,
-      "filterable": 0
-    },
     {
       "key": "少女",
       "name": "👧少女资源",
@@ -31,6 +22,18 @@
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
+    },
+    {
+      "key": "ck",
+      "name": "🎀CK资源",
+      "type": 0,
+      "api": "https://ckzy.me/api.php/provide/vod/at/xml/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "categories": [
+        "伦理片"
+      ]
     },
     {
       "key": "伊人",
