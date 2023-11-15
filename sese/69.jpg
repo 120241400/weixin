@@ -171,10 +171,10 @@
       "filterable": 0
     },
     {
-      "key": "森林资源",
-      "name": "🌏森林资源",
+      "key": "易看资源",
+      "name": "🌏易看资源",
       "type": 0,
-      "api": "https://slapibf.com/api.php/provide/vod/at/xml/",
+      "api": "https://api.yikanapi.com/api.php/provide/vod/at/xml/",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
