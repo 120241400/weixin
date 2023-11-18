@@ -81,6 +81,15 @@
       "filterable": 0
     },
     {
+      "key": "博民",
+      "name": "🐂博民资源",
+      "type": 0,
+      "api": "https://www.bominzy.com/api.php/provide/vod/at/xml",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    },
+    {
       "key": "极品",
       "name": "🎄极品资源",
       "type": 0,
