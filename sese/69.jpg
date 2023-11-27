@@ -1,16 +1,12 @@
 {
   "wallpaper": "http://www.kf666888.cn/api/tvbox/img",
-  "lives": [
+"lives": [
     {
-      "group": "redirect",
-      "channels": [
-        {
-          "name": "live",
-          "urls": [
-            "proxy://do=live&type=txt&ext=aHR0cHM6Ly9kb3dubG9hZC5rc3RvcmUuc3BhY2UvZG93bmxvYWQvMjg4My9QWS8xMTA4LnR4dA=="
-          ]
-        }
-      ]
+      "name": "TXT",
+      "type": 0,
+      "url": "https://jkbd.neocities.org/mao/jiekou/sesetv.txt",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}",
+      "logo": "https://epg.112114.xyz/logo/{name}.png"
     }
   ],
   "sites": [
