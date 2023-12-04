@@ -203,8 +203,17 @@
       "filterable": 0
     },
     {
+      "key": "久久",
+      "name": "🍺久久资源",
+      "type": 0,
+      "api": "http://99zywcj.com/inc/sapi.php?ac=videolist",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    },
+    {
       "key": "五五",
-      "name": "🍺五五资源",
+      "name": "✋五五资源",
       "type": 0,
       "api": "https://155api.com/api.php/Seacms/vod/at/xml/",
       "searchable": 0,
