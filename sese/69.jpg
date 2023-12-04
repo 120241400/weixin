@@ -38,6 +38,15 @@
       "filterable": 0
     },
     {
+      "key": "大地",
+      "name": "🌽大地资源",
+      "type": 0,
+      "api": "https://dadiapi.com/api.php",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    },
+    {
       "key": "ck",
       "name": "🎀CK资源",
       "type": 0,
