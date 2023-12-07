@@ -268,7 +268,16 @@
       "key": "老鸭资源",
       "name": "🦆老鸭资源",
       "type": 0,
-      "api": "https://api.laoya.vip/api.php/provide/vod/at/xml",
+      "api": "https://api.apilyzy.vip/api.php/provide/vod/at/xml",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    },
+{
+      "key": "色窝资源",
+      "name": "🍙色窝资源",
+      "type": 0,
+      "api": "https://sewozyapi.com/api.php/provide/vod/at/xmlsea/",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
