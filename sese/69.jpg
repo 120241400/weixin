@@ -21,9 +21,9 @@
     },
     {  
       "key": "速度",
-      "name": "🚀速度资源",
+      "name": "🍓草莓资源",
       "type": 0,
-      "api": "http://www.ggmmzy.com:9999/inc/xml",
+      "api": "https://www.cmzyz.cc/Cmzyzapi.php/provide/vod/at/xml",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
