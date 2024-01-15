@@ -113,10 +113,10 @@
       "filterable": 0
     },
     {
-      "key": "极品",
-      "name": "🎄极品资源",
+      "key": "大地",
+      "name": "🌽大地资源",
       "type": 0,
-      "api": "https://jpzy.me/api.php/provide/vod/at/xml",
+      "api": "https://dadiapi.com/api.php",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
