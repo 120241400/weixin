@@ -183,10 +183,10 @@
       "filterable": 0
     },
     {
-      "key": "色鸭资源",
-      "name": "🏓色鸭资源",
+      "key": "探探资源",
+      "name": "🏓探探资源",
       "type": 0,
-      "api": "https://api.seyavod.com/api.php/provide/vod/at/xml/",
+      "api": "https://apittzy.com/api.php/provide/vod/at/xml/",
 "playUrl": "https://wangqing.vip/mao/taobao/bfqtk.html?url=",
       "searchable": 0,
       "quickSearch": 0,
