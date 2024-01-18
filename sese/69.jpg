@@ -6,7 +6,7 @@
       "name": "🏆奥斯资源",
       "type": 0,
       "api": "https://aosikazy.com/api.php/provide/vod/at/xml",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -279,7 +279,7 @@
       "name": "😍色色资源",
       "type": 0,
       "api": "http://cjmygzy.com/inc/sapi.php?ac=videolist",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -289,7 +289,7 @@
       "name": "🍺久久资源",
       "type": 0,
       "api": "http://99zywcj.com/inc/sapi.php?ac=videolist",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -299,7 +299,7 @@
       "name": "✋五五资源",
       "type": 0,
       "api": "https://155api.com/api.php/Seacms/vod/at/xml/",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -309,7 +309,7 @@
       "name": "📅番号资源",
       "type": 0,
       "api": "http://fhapi9.com/api.php/provide/vod/at/xml",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -319,7 +319,7 @@
       "name": "💋速看资源",
       "type": 0,
       "api": "https://ziyuan.skm3u8.com/api.php/sea/provide/vod",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -329,7 +329,7 @@
       "name": "🦆老鸭资源",
       "type": 0,
       "api": "https://api.apilyzy.com/api.php/provide/vod/at/xml",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -339,7 +339,7 @@
       "name": "🍙色窝资源",
       "type": 0,
       "api": "https://sewozyapi.com/api.php/provide/vod/at/xml",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
@@ -349,7 +349,7 @@
       "name": "🌸花魁资源",
       "type": 0,
       "api": "https://caiji.huakuiapi.com/inc/api.php",
-      "playUrl": "https://leafy-salmiakki-8e302a.netlify.app/sese/bfq.html?url=",
+      "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
