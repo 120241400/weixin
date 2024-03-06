@@ -82,10 +82,10 @@
       "filterable": 0
     },
     {
-      "key": "伊人",
-      "name": "🕊️伊人资源",
+      "key": "色逼",
+      "name": "🕊️色逼资源",
       "type": 0,
-      "api": "https://api.yirenziyuan.com/api.php/provide/vod/at/xml",
+      "api": "https://apilsbzy.com/api.php/provide/vod/at/xml",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
