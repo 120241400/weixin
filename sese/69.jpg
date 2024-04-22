@@ -18,7 +18,7 @@
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
-            "jar": "https://file.uhsea.com/2404/b57865d7d36048f34ac9e0b556efae063L.jar",
+            "jar": "http://152.32.170.60/leevi/PiG/raw/branch/master/lib/XBPQ.jar",
             "api": "csp_XBPQ",
             "ext": {
             "直接播放":"1",
@@ -35,7 +35,7 @@
             "quickSearch": 1,
             "filterable": 1,
             "api": "csp_XBPQ",
-            "jar": "https://file.uhsea.com/2404/b57865d7d36048f34ac9e0b556efae063L.jar",
+            "jar": "http://152.32.170.60/leevi/PiG/raw/branch/master/lib/XBPQ.jar",
             "ext":{
             "分类":"今日吃瓜$6#今日热搜$7#热门大瓜$8#黑料历史$10#独家爆料$9",
              "分类url":"https://yt6d.yilecdi.com/category/{cateId}/{catePg}.html",
