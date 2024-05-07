@@ -12,6 +12,16 @@
       "filterable": 0
     },
     {
+      "key": "越南",
+      "name": "🌒越南资源",
+      "type": 0,
+      "api": "https://vnzyz.com/api.php/provide/vod/at/xml",
+      "playUrl": "./bfq.html?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
       "key": "森林",
       "name": "🌳森林资源",
       "type": 0,
