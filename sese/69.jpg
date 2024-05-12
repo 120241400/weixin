@@ -32,10 +32,10 @@
       "filterable": 0
     },
     {
-      "key": "草莓",
-      "name": "🍓草莓资源",
+      "key": "色虎",
+      "name": "🐯色虎资源",
       "type": 0,
-      "api": "https://www.cmzyz.cc/Cmzyzapi.php/provide/vod/at/xml",
+      "api": "https://apisesehuzy.com/api.php/provide/vod/at/xml",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
