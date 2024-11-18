@@ -182,10 +182,10 @@
       "filterable": 0
     },
     {
-      "key": "久久",
-      "name": "🍺久久资源",
+      "key": "番茄",
+      "name": "🍅番茄资源",
       "type": 0,
-      "api": "http://99zywcj.com/inc/sapi.php?ac=videolist",
+      "api": "https://fqzy.me/provide/vod/at/xml/?ac=list",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
