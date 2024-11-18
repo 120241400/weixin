@@ -52,10 +52,10 @@
       "filterable": 0
     },
     {
-      "key": "狼友",
-      "name": "🐺狼友资源",
+      "key": "百万",
+      "name": "💵百万资源",
       "type": 0,
-      "api": "https://api.lyhapi.com/api.php/provide/vod/at/xml",
+      "api": "http://api.bwzym3u8.com/api.php/provide/vod/at/xml",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
