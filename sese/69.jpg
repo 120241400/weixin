@@ -173,9 +173,9 @@
     },
     {
       "key": "铯铯",
-      "name": "😍色色资源",
+      "name": "😍色戒资源",
       "type": 0,
-      "api": "http://cjmygzy.com/inc/sapi.php?ac=videolist",
+      "api": "https://sjzy.tv/api.php/provide/vod/at/xml/?ac=list",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
