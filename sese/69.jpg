@@ -82,10 +82,10 @@
       "filterable": 0
     },
     {
-      "key": "红袖",
-      "name": "🍷红袖资源",
+      "key": "桃花",
+      "name": "🌸桃花资源",
       "type": 0,
-      "api": "https://hongxiuzy.com/api.php/provide/vod/from/hxm3u8/at/xml",
+      "api": "https://thzy5.me/api.php/provide/vod/at/xml",
       "playUrl": "./bfq.html?url=",
       "searchable": 0,
       "quickSearch": 1,
