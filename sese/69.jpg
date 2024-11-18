@@ -42,10 +42,10 @@
       "filterable": 0
     },
     {
-      "key": "大地",
-      "name": "🌽大地资源",
+      "key": "玉兔",
+      "name": "🐰玉兔资源",
       "type": 0,
-      "api": "https://dadiapi.com/api.php",
+      "api": "https://apiyutu.com/api.php/provide/vod/at/xml",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
