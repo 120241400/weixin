@@ -2,10 +2,20 @@
   "wallpaper": "http://maoyingshi.cc/api.php",
   "sites": [
     {
-      "key": "奥斯",
-      "name": "🏆奥斯资源",
+      "key": "大地",
+      "name": "🌽大地资源",
       "type": 0,
-      "api": "https://aosikazy.com/api.php/provide/vod/at/xml",
+      "api": "https://dadiapi.com/api.php",
+      "playUrl": "./bfq.html?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
+      "key": "奥斯",
+      "name": "🏆细胞资源",
+      "type": 0,
+      "api": "https://www.xxibaozyw.com/api.php/provide/vod/at/xml/",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
@@ -26,16 +36,6 @@
       "name": "💈GAY资源",
       "type": 0,
       "api": "https://gayzy1.com/api.php/provide/vod/at/xml",
-      "playUrl": "./bfq.html?url=",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0
-    },
-    {
-      "key": "大地",
-      "name": "🌽大地资源",
-      "type": 0,
-      "api": "https://dadiapi.com/api.php",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
