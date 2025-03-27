@@ -33,9 +33,9 @@
     },
 {
       "key": "GAY",
-      "name": "💈百万资源",
+      "name": "🍇葡萄资源",
       "type": 0,
-      "api": "https://api.bwzym3u8.com/api.php/provide/vod/at/xml/",
+      "api": "https://caiji.putaozyw.net/inc/api.php",
       "playUrl": "./bfq.html?url=",
       "searchable": 1,
       "quickSearch": 1,
