@@ -100,7 +100,7 @@
 <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
 <ul class="am-nav am-nav-pills am-topbar-nav" id="toutou">
 </ul>
-<form class="am-topbar-form am-topbar-left am-form-inline" role="search" action="https://leafy-salmiakki-8e302a.netlify.app/360/so.html" name="tyForm" onsubmit="return Checkfrom();">
+<form class="am-topbar-form am-topbar-left am-form-inline" role="search" action="https://leafy-salmiakki-8e302a.netlify.app/360/so.html" name="tyForm" onsubmit="return Checkfrom();"target="_blank">
 <div class="am-input-group am-input-group-primary am-input-group-sm">
 <input name="url" type="text" class="am-form-field" placeholder="搜索..." required>
 <span class="am-input-group-btn">
@@ -322,7 +322,7 @@ $(function (){
               var timu="";
 
 for(var i=0,l=data.data.movies.length;i<l;i++){
-timu+='<li><a class="movie-item" href="https://leafy-salmiakki-8e302a.netlify.app/360/so.html?url='+data.data.movies[i].title+'"><div class="movie-cover"><img src="https:'+data.data.movies[i].cdncover+'" ><span class="movie-description"><i class="description-bg"></i><p>主演：暂无</p><p>导演：暂无</p><p>&gt; 在线观看</p></span></div><div class="movie-title"><p class="movie-name">'+data.data.movies[i].title+'</p><p class="movie-tags">'+data.data.movies[i].comment+'</p></div></a></li>'}
+timu+='<li><a class="movie-item" href="https://leafy-salmiakki-8e302a.netlify.app/360/so.html?url='+data.data.movies[i].title+'"target="_blank"><div class="movie-cover"><img src="https:'+data.data.movies[i].cdncover+'" ><span class="movie-description"><i class="description-bg"></i><p>主演：暂无</p><p>导演：暂无</p><p>&gt; 在线观看</p></span></div><div class="movie-title"><p class="movie-name">'+data.data.movies[i].title+'</p><p class="movie-tags">'+data.data.movies[i].comment+'</p></div></a></li>'}
 document.getElementById("list").innerHTML=timu;
             }  })
     })
