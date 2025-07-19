@@ -1,6 +1,7 @@
 {
   "wallpaper": "http://maoyingshi.cc/api.php",
-  "sites": [
+    "logo": "https://txmov2.a.kwimgs.com/bs2/upload-kwaishop-material-public/dXBsb2FkLWt3YWlzaG9wLW1hdGVyaWFsLXB1YmxpYzpNRVNTQUdFX0NFTlRFUl9GRUVEQkFDSzo0NzAzNjAwMTY1Ok1FUkNIQU5UOltCQDczYzZhYTE0OjEwMDA3NjIwMDI2MTY1.jpg",
+"sites": [
     {
       "key": "大地",
       "name": "🌽大地资源",
