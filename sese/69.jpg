@@ -243,6 +243,45 @@
       "filterable": 0
     },
     {
+      "key": "奶子",
+      "name": "🍼大奶资源",
+      "type": 0,
+      "api": "https://apidanaizi.com/api.php/provide/vod/at/xml/",
+      "playUrl": "./bfq.html?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
+      "key": "小鸡",
+      "name": "🐤小鸡资源",
+      "type": 0,
+      "api": "https://api.xiaojizy.live/provide/vod?at=xml&ac=list",
+      "playUrl": "./bfq.html?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
+      "key": "杏吧",
+      "name": "🍊杏吧资源",
+      "type": 0,
+      "api": "https://api.xgbbk8.com/api.php/provide/vod/at/xml",
+      "playUrl": "./bfq.html?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },    {
+      "key": "快播",
+      "name": "🎞快播资源",
+      "type": 0,
+      "api": "https://gayapi.com/api.php/provide/vod/at/xml/",
+      "playUrl": "./bfq.html?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
       "key": "花魁",
       "name": "🌸花魁资源",
       "type": 0,
