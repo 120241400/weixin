@@ -42,8 +42,7 @@
             z-index: 9999; /* 确保在iframe之上 */
             align-items: center; /* 按钮在容器内垂直居中 */
             padding: 0 10px; /* 左右留白，避免按钮贴屏幕边缘 */
-            background-color: #000000; /* 新增：设置按钮容器背景色为000000 */
-            opacity: 0.95; /* 可选：增加轻微透明度，让背景色不那么生硬 */
+            background-color: #0F172A; /* 背景色改为0F172A */
         }
 
         /* 单个按钮样式：宽度自适应均分，高度固定 */
@@ -177,9 +176,10 @@
 
     <script>
         // ---------------- 修改：1/2/3按钮跳转逻辑（新窗口打开） ----------------
-        // 按钮1：跳转到百度搜索（新窗口）
+        // 按钮1：修改为在当前窗口打开（iframe中加载）
         document.getElementById('btn1').addEventListener('click', function() {
-            window.open('https://leafy-salmiakki-8e302a.netlify.app/wx/bangning/', '_blank');
+            const targetIframe = document.getElementById('target-iframe');
+            targetIframe.src = 'https://leafy-salmiakki-8e302a.netlify.app/wx/bangning/';
         });
 
         // 按钮2：跳转到搜狗搜索（新窗口）
@@ -199,6 +199,7 @@
         const closeBtn = document.getElementById('closeBtn');
         const searchBtn = document.getElementById('searchBtn');
         const searchInput = document.getElementById('search-input');
+        const targetIframe = document.getElementById('target-iframe'); // 复用iframe元素
 
         // 按钮4点击：显示弹窗
         btn4.addEventListener('click', function() {
@@ -212,7 +213,7 @@
             searchInput.value = ''; // 清空搜索框
         });
 
-        // 搜索按钮点击：执行搜索逻辑（可自定义）
+        // 搜索按钮点击：执行搜索逻辑（修改：在iframe中打开）
         searchBtn.addEventListener('click', function() {
             const searchText = searchInput.value.trim();
             if (!searchText) {
@@ -221,8 +222,8 @@
                 return;
             }
 
-            // 示例：默认跳转到百度搜索（新窗口），可替换为其他搜索引擎
-            window.open(`https://leafy-salmiakki-8e302a.netlify.app/wx/bangning/so.html?url=${encodeURIComponent(searchText)}`, '_blank');
+            // 修改：不再打开新窗口，而是修改iframe的src属性，在当前iframe中显示结果
+            targetIframe.src = `https://leafy-salmiakki-8e302a.netlify.app/wx/bangning/so.html?url=${encodeURIComponent(searchText)}`;
             
             // 可选：搜索后关闭弹窗
             searchModal.style.display = 'none';
@@ -246,7 +247,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
