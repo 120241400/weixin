@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>请勿相信视频中的广告</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Microsoft YaHei", sans-serif;
+    }
+    html, body {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        background: #0f172a;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* ========== 新增：顶部空白区域样式 ========== */
+    .top-blank-area {
+        width: 100%;
+        height: 100px;
+        background: #0f172a; /* 保持和body一致的底色 */
+        flex-shrink: 0;
+    }
+
+    .nav-box, .footer-box {
+        width: 100%;
+        background: #1e293b;
+        padding: 9px 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        border: none;
+        height: 46px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-box {
+        box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
+    }
+    .nav-scroll {
+        width: 100%;
+        max-width: 1200px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .nav-scroll::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-list {
+        display: flex;
+        gap: 8px;
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    .nav-btn {
+        padding: 10px 28px;
+        background: #334155;
+        border: 1px solid #475569;
+        border-radius: 18px;
+        font-size: 14px;
+        color: #f1f5f9;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+    .nav-btn:hover {
+        background: #475569;
+        border-color: #64748b;
+    }
+    .nav-btn.active {
+        background: #0ea5e9;
+        color: #ffffff;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(14, 165, 233, 0.4);
+        border-color: #0ea5e9;
+    }
+
+    .nav-btn.home-btn {
+        background: #1e40af;
+        border-color: #1e40af;
+        color: #ffffff;
+    }
+    .nav-btn.home-btn:hover {
+        background: #1e3a8a;
+        border-color: #1e3a8a;
+    }
+
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+    }
+    .search-container {
+        flex: 1;
+        width: 100%;
+        background: #1e293b;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* ========== 核心修复1：iframe全屏权限样式 ========== */
+    #search-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        /* 允许iframe内部元素全屏 */
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    /* 悬浮搜索弹窗 - 保留样式但移除功能触发 */
+    .search-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        background: rgba(0,0,0,0.7);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    .search-modal.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .search-modal-box {
+        width: 90%;
+        max-width: 500px;
+        background: #1e293b;
+        border-radius: 20px;
+        padding: 25px 20px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        position: relative;
+    }
+    .search-close {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #334155;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .search-close:hover {
+        background: #ef4444;
+    }
+    .search-modal-title {
+        text-align: center;
+        color: #f1f5f9;
+        font-size: 18px;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+    .search-input-wrap {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    #localInput {
+        flex: 1;
+        height: 44px;
+        padding: 0 15px;
+        border-radius: 12px;
+        border: 1px solid #475569;
+        background: #334155;
+        color: #f1f5f9;
+        font-size: 15px;
+        outline: none;
+    }
+    #localInput:focus {
+        border-color: #0ea5e9;
+        background: #3a4658;
+    }
+    #localSearchBtn {
+        height: 44px;
+        padding: 0 20px;
+        border-radius: 12px;
+        border: 1px solid #0ea5e9;
+        background: #0ea5e9;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    #localSearchBtn:hover {
+        background: #0284c7;
+    }
+
+    @media (max-width: 768px) {
+        .nav-box, .footer-box {
+            padding: 8px 10px;
+            height: 40px;
+        }
+        .nav-btn {
+            padding: 9px 22px;
+            font-size: 13px;
+        }
+        .search-modal-box {
+            width: 95%;
+            padding: 20px 16px;
+        }
+        #localInput, #localSearchBtn {
+            height: 42px;
+            font-size: 14px;
+        }
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        .app-container,
+        .search-modal {
+            height: -webkit-fill-available;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- ========== 新增：顶部100px空白区域 ========== -->
+    <div class="top-blank-area"></div>
+
+    <div class="nav-box">
+        <div class="nav-scroll">
+            <div class="nav-list">
+                <!-- 保留一线、二线按钮，移除主页和搜索按钮 -->
+                <button class="nav-btn active" data-prefix="https://120241400.com/app/lele/youhou/jx2.html?url=">一线</button>
+                <button class="nav-btn" data-prefix="https://video.isyour.love/player/getplayer?url=">二线</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <!-- ========== 核心修复2：添加全屏权限属性 ========== -->
+        <iframe 
+            id="search-iframe" 
+            src="about:blank"
+            allowfullscreen
+            webkitallowfullscreen
+            mozallowfullscreen
+            oallowfullscreen
+            msallowfullscreen
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        ></iframe>
+    </div>
+
+    <div class="footer-box"></div>
+</div>
+
+<!-- 搜索弹窗保留（如需完全删除可直接移除这段代码） -->
+<div class="search-modal" id="searchModal">
+    <div class="search-modal-box">
+        <button class="search-close" id="closeSearch">✕</button>
+        <div class="search-modal-title">影视搜索</div>
+        <div class="search-input-wrap">
+            <input type="text" id="localInput" placeholder="请输入影片关键词...">
+            <button id="localSearchBtn">确定</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ========== 关键修改：处理关键词，只保留空格前的内容 ==========
+function getUrlKeyword() {
+    const params = new URLSearchParams(window.location.search);
+    let keyword = params.get('url') || '';
+    // 按空格分割，只取第一个部分
+    if (keyword) {
+        keyword = keyword.split(' ')[0];
+    }
+    return keyword;
+}
+
+function resizeHandler() {
+    document.querySelector('.app-container').style.height = window.innerHeight + 'px';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const iframe = document.getElementById('search-iframe');
+    const btns = document.querySelectorAll('.nav-btn');
+    const keyword = getUrlKeyword();
+
+    resizeHandler();
+    window.addEventListener('resize', resizeHandler);
+    window.addEventListener('orientationchange', resizeHandler);
+
+    if (keyword) {
+        iframe.src = `https://120241400.com/app/lele/youhou/jx2.html?url=${encodeURIComponent(keyword)}`;
+    } else {
+        iframe.src = 'about:blank';
+    }
+
+    btns.forEach((btn, index) => {
+        if (keyword && index === 0 && !btn.classList.contains('home-btn') && btn.id !== 'openSearch') {
+            btn.classList.add('active');
+        }
+
+        btn.addEventListener('click', function () {
+            // 移除主页按钮和搜索按钮的逻辑判断（已删除对应按钮）
+            const kw = getUrlKeyword();
+            if (!kw) return;
+
+            btns.forEach(b => {
+                // 移除home-btn和openSearch的判断（已删除对应按钮）
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            const prefix = this.getAttribute('data-prefix');
+            iframe.src = prefix + encodeURIComponent(kw);
+        });
+    });
+
+    // 保留搜索弹窗逻辑（如需完全删除可移除这段代码）
+    const modal = document.getElementById('searchModal');
+    const closeBtn = document.getElementById('closeSearch');
+    const searchInput = document.getElementById('localInput');
+    const searchBtn = document.getElementById('localSearchBtn');
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('show');
+    });
+
+    // 跳转到当前页面 ?url=
+    function doLocalSearch() {
+        let val = searchInput.value.trim();
+        // ========== 关键修改：搜索框输入也应用相同规则 ==========
+        if (val) {
+            // 按空格分割，只取第一个部分
+            val = val.split(' ')[0];
+            location.href = `?url=${encodeURIComponent(val)}`;
+        } else {
+            alert('请输入内容');
+        }
+    }
+
+    searchBtn.addEventListener('click', doLocalSearch);
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') doLocalSearch();
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自适应宽度 + 固定高度悬浮按钮 + 全屏iframe + 搜索弹窗</title>
+    <style>
+        /* 重置所有元素默认边距，确保无间隙 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 容器样式：占满整个视口，相对定位 */
+        .iframe-container {
+            position: relative;
+            width: 100vw; /* 宽度占满视口 */
+            height: 100vh; /* 高度占满视口 */
+            overflow: hidden; /* 隐藏溢出内容，避免滚动条 */
+        }
+
+        /* iframe样式：全屏显示，覆盖整个容器 */
+        #target-iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* 去掉默认边框 */
+            display: block; /* 消除行内元素的微小间隙 */
+        }
+
+        /* 悬浮按钮容器：宽度自适应，高度固定90px，贴顶居中 */
+        .float-buttons {
+            position: absolute;
+            top: 0; /* 紧贴顶部 */
+            left: 0; /* 取消原居中，改为占满宽度 */
+            right: 0; /* 左右贴边，实现宽度自适应 */
+            width: 100%; /* 宽度占满父容器（视口） */
+            max-width: 100%; /* 限制最大宽度为视口宽度 */
+            height: 90px; /* 固定高度90px，始终不变 */
+            display: flex; /* 弹性布局均分按钮 */
+            gap: 10px; /* 按钮间距，自适应时保持固定间距 */
+            z-index: 9999; /* 确保在iframe之上 */
+            align-items: center; /* 按钮在容器内垂直居中 */
+            padding: 0 10px; /* 左右留白，避免按钮贴屏幕边缘 */
+            background-color: #0F172A; /* 新增：设置按钮容器背景色为0F172A */
+            opacity: 0.95; /* 可选：增加轻微透明度，让背景色不那么生硬 */
+        }
+
+        /* 单个按钮样式：宽度自适应均分，高度固定 */
+        .float-button {
+            flex: 1; /* 均分自适应宽度 */
+            height: 80%; /* 按钮高度为容器的80%，留少量内边距更美观 */
+            min-height: 40px; /* 小屏幕最低高度，避免按钮过矮 */
+            border: none;
+            border-radius: 8px;
+            background-color: #409eff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex; /* 按钮内部文字居中 */
+            align-items: center; /* 文字垂直居中 */
+            justify-content: center; /* 文字水平居中 */
+        }
+
+        .float-button:hover {
+            background-color: #66b1ff;
+        }
+
+        /* 可选：小屏幕调整字体大小，避免文字溢出 */
+        @media (max-width: 480px) {
+            .float-button {
+                font-size: 14px; /* 手机端字体稍小，适配窄宽度 */
+            }
+        }
+
+        /* ---------------- 搜索弹窗样式 ---------------- */
+        /* 弹窗遮罩层：全屏半透明背景 */
+        .search-modal-mask {
+            position: fixed; /* 固定定位，跟随视口 */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩 */
+            z-index: 99999; /* 层级高于按钮，确保在最上层 */
+            display: none; /* 默认隐藏 */
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+        }
+
+        /* 弹窗内容框：上下左右居中的白色容器 */
+        .search-modal-content {
+            width: 90%; /* 自适应宽度，小屏幕友好 */
+            max-width: 500px; /* 限制最大宽度 */
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); /* 阴影提升层次感 */
+        }
+
+        /* 搜索框样式 */
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        #search-input {
+            flex: 1; /* 输入框占满剩余宽度 */
+            height: 40px;
+            padding: 0 15px;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #search-input:focus {
+            border-color: #409eff; /* 聚焦时高亮边框 */
+        }
+
+        /* 搜索/关闭按钮样式 */
+        .search-btn, .close-btn {
+            padding: 0 20px;
+            height: 40px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn {
+            background-color: #409eff;
+            color: white;
+        }
+
+        .search-btn:hover {
+            background-color: #66b1ff;
+        }
+
+        .close-btn {
+            background-color: #f5f5f5;
+            color: #666;
+        }
+
+        .close-btn:hover {
+            background-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="iframe-container">
+        <!-- 悬浮按钮组：修改按钮文字为对应搜索引擎 -->
+        <div class="float-buttons">
+            <button class="float-button" id="btn1">百度搜索</button>
+            <button class="float-button" id="btn2">搜狗搜索</button>
+            <button class="float-button" id="btn3">360搜索</button>
+            <button class="float-button" id="btn4">自定义搜索</button> <!-- 按钮4文字优化 -->
+        </div>
+
+        <!-- 全屏iframe：替换src为你的目标网址 -->
+        <iframe id="target-iframe" src="https://leafy-salmiakki-8e302a.netlify.app/wx/1907/baidu?from_sf=1&word=%E5%BD%B1%E8%A7%86%E4%BD%9C%E5%93%81%0A%0A&title=%E7%89%87%E5%BA%93&resource_id=51274&top=%7B%22sfhs%22:0%7D&ms=1&openapi=1&trigger_srcid=51251&tn=tangram&pd=movie_general&ext=%0A%0A%7B%22sf_tab_name%22:%2520%E7%94%B5%E8%A7%86%E5%89%A7%2520%22%7D&stat0=%E7%94%B5%E8%A7%86%E5%89%A7&frorder=1&q_ext=%7B%22video_type_list%22:%5B%22%E7%94%B5%E5%BD%B1%22,%22%E7%94%B5%E8%A7%86%E5%89%A7%22,%22%E7%BB%BC%E8%89%BA%22,%22%E5%8A%A8%E6%BC%AB%22,%22%E7%BA%AA%E5%BD%95%E7%89%87%22%5D%7D%0A%0A&fxqPattern=1&isColumn=1&"></iframe>
+    </div>
+
+    <!-- 搜索弹窗 -->
+    <div class="search-modal-mask" id="searchModal">
+        <div class="search-modal-content">
+            <div class="search-input-group">
+                <input type="text" id="search-input" placeholder="请输入搜索内容...">
+                <button class="search-btn" id="searchBtn">搜索</button>
+            </div>
+            <button class="close-btn" id="closeBtn">关闭弹窗</button>
+        </div>
+    </div>
+
+    <script>
+        // ---------------- 修改：1/2/3按钮跳转逻辑（新窗口打开） ----------------
+        // 按钮1：跳转到百度搜索（新窗口）
+        document.getElementById('btn1').addEventListener('click', function() {
+            window.open('https://www.baidu.com', '_blank');
+        });
+
+        // 按钮2：跳转到搜狗搜索（新窗口）
+        document.getElementById('btn2').addEventListener('click', function() {
+            window.open('https://www.sogou.com', '_blank');
+        });
+
+        // 按钮3：跳转到360搜索（新窗口）
+        document.getElementById('btn3').addEventListener('click', function() {
+            window.open('https://www.so.com', '_blank');
+        });
+
+        // ---------------- 保留：按钮4的搜索弹窗逻辑 ----------------
+        // 获取元素
+        const btn4 = document.getElementById('btn4');
+        const searchModal = document.getElementById('searchModal');
+        const closeBtn = document.getElementById('closeBtn');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('search-input');
+
+        // 按钮4点击：显示弹窗
+        btn4.addEventListener('click', function() {
+            searchModal.style.display = 'flex'; // 显示弹窗（flex实现居中）
+            searchInput.focus(); // 自动聚焦搜索框，提升体验
+        });
+
+        // 关闭按钮点击：隐藏弹窗
+        closeBtn.addEventListener('click', function() {
+            searchModal.style.display = 'none';
+            searchInput.value = ''; // 清空搜索框
+        });
+
+        // 搜索按钮点击：执行搜索逻辑（可自定义）
+        searchBtn.addEventListener('click', function() {
+            const searchText = searchInput.value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容！');
+                searchInput.focus();
+                return;
+            }
+
+            // 示例：默认跳转到百度搜索（新窗口），可替换为其他搜索引擎
+            window.open(`https://www.baidu.com/s?wd=${encodeURIComponent(searchText)}`, '_blank');
+            
+            // 可选：搜索后关闭弹窗
+            searchModal.style.display = 'none';
+            searchInput.value = '';
+        });
+
+        // 点击遮罩层空白处关闭弹窗
+        searchModal.addEventListener('click', function(e) {
+            if (e.target === searchModal) {
+                searchModal.style.display = 'none';
+                searchInput.value = '';
+            }
+        });
+
+        // 按ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && searchModal.style.display === 'flex') {
+                searchModal.style.display = 'none';
+                searchInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
