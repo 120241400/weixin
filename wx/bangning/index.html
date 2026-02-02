@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自适应宽度 + 固定高度悬浮按钮 + 全屏iframe + 搜索弹窗</title>
+    <title>白象影视（二站）</title>
     <style>
         /* 重置所有元素默认边距，确保无间隙 */
         * {
@@ -42,7 +42,7 @@
             z-index: 9999; /* 确保在iframe之上 */
             align-items: center; /* 按钮在容器内垂直居中 */
             padding: 0 10px; /* 左右留白，避免按钮贴屏幕边缘 */
-            background-color: #0F172A; /* 新增：设置按钮容器背景色为0F172A */
+            background-color: #000000; /* 新增：设置按钮容器背景色为000000 */
             opacity: 0.95; /* 可选：增加轻微透明度，让背景色不那么生硬 */
         }
 
@@ -161,7 +161,7 @@
         </div>
 
         <!-- 全屏iframe：替换src为你的目标网址 -->
-        <iframe id="target-iframe" src="https://leafy-salmiakki-8e302a.netlify.app/wx/1907/baidu?from_sf=1&word=%E5%BD%B1%E8%A7%86%E4%BD%9C%E5%93%81%0A%0A&title=%E7%89%87%E5%BA%93&resource_id=51274&top=%7B%22sfhs%22:0%7D&ms=1&openapi=1&trigger_srcid=51251&tn=tangram&pd=movie_general&ext=%0A%0A%7B%22sf_tab_name%22:%2520%E7%94%B5%E8%A7%86%E5%89%A7%2520%22%7D&stat0=%E7%94%B5%E8%A7%86%E5%89%A7&frorder=1&q_ext=%7B%22video_type_list%22:%5B%22%E7%94%B5%E5%BD%B1%22,%22%E7%94%B5%E8%A7%86%E5%89%A7%22,%22%E7%BB%BC%E8%89%BA%22,%22%E5%8A%A8%E6%BC%AB%22,%22%E7%BA%AA%E5%BD%95%E7%89%87%22%5D%7D%0A%0A&fxqPattern=1&isColumn=1&"></iframe>
+        <iframe id="target-iframe" src="https://leafy-salmiakki-8e302a.netlify.app/wx/bangning/baidu?from_sf=1&word=%E5%BD%B1%E8%A7%86%E4%BD%9C%E5%93%81%0A%0A&title=%E7%89%87%E5%BA%93&resource_id=51274&top=%7B%22sfhs%22:0%7D&ms=1&openapi=1&trigger_srcid=51251&tn=tangram&pd=movie_general&ext=%0A%0A%7B%22sf_tab_name%22:%2520%E7%94%B5%E8%A7%86%E5%89%A7%2520%22%7D&stat0=%E7%94%B5%E8%A7%86%E5%89%A7&frorder=1&q_ext=%7B%22video_type_list%22:%5B%22%E7%94%B5%E5%BD%B1%22,%22%E7%94%B5%E8%A7%86%E5%89%A7%22,%22%E7%BB%BC%E8%89%BA%22,%22%E5%8A%A8%E6%BC%AB%22,%22%E7%BA%AA%E5%BD%95%E7%89%87%22%5D%7D%0A%0A&fxqPattern=1&isColumn=1&"></iframe>
     </div>
 
     <!-- 搜索弹窗 -->
@@ -222,7 +222,7 @@
             }
 
             // 示例：默认跳转到百度搜索（新窗口），可替换为其他搜索引擎
-            window.open(`https://www.baidu.com/s?wd=${encodeURIComponent(searchText)}`, '_blank');
+            window.open(`https://leafy-salmiakki-8e302a.netlify.app/wx/bangning/sonhtml?url=${encodeURIComponent(searchText)}`, '_blank');
             
             // 可选：搜索后关闭弹窗
             searchModal.style.display = 'none';
@@ -246,4 +246,5 @@
         });
     </script>
 </body>
+
 </html>
