@@ -1,124 +1,286 @@
-﻿
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-		name="viewport" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>勿信视频中广告</title>
-		<meta name="keywords" content="忘情免费解析">
-		<meta name="description" content="忘情免费解析">
-        <link rel="shortcut icon" href="https://nojx.cc/landing/huangguan.png" />
-        </script><link href="https://nojx.cc/landing/style.css" rel="stylesheet">
-<script src="https://nojx.cc/landing/style.js" type="text/javascript"></script>
-<link href="https://nojx.cc/landing/layui.css" rel="stylesheet">
-<script src="https://nojx.cc/landing/jquery.min.js"></script>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- 保留指定标题 -->
+    <title>请勿相信视频中广告</title>
+    <meta name="keywords" content="忘情免费解析">
+    <meta name="description" content="忘情免费解析">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="https://img.5020.work/img/favicon.png">
+    <link rel="stylesheet" href="https://lib.baomitu.com/amazeui/2.7.1/css/amazeui.min.css">
+    <script src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
+    <style type="text/css">
+        @charset "utf-8";
+        /* 1. 根元素重置，禁止整体滚动 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+            /* 继承原index.html的背景色 */
+            background: #0f172a;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        * {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+        }
 
+        /* 顶栏样式 */
+        .am-topbar {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            height: 50px;
+            line-height: 50px;
+            margin: 0 !important;
+            padding: 0 10px !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+        .am-topbar-brand {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100%;
+        }
+        .am-topbar-brand a {
+            color: #333;
+            text-decoration: none;
+            display: inline-block;
+            height: 100%;
+            line-height: 50px;
+        }
+
+        /* 原index.html的导航栏样式（调整位置，避开顶栏） */
+        .nav-box, .footer-box {
+            width: 100%;
+            background: #1e293b;
+            padding: 9px 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: none;
+            height: 46px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 避开顶栏 */
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 998;
+        }
+        .nav-box {
+            top: 50px; /* 顶栏高度50px，导航栏在顶栏下方 */
+        }
+        .footer-box {
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
+            bottom: 0;
+        }
+        .nav-scroll {
+            width: 100%;
+            max-width: 1200px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .nav-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-list {
+            display: flex;
+            gap: 8px;
+            width: max-content;
+            margin: 0 auto;
+        }
+        .nav-btn {
+            padding: 10px 28px;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 18px;
+            font-size: 14px;
+            color: #f1f5f9;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .nav-btn:hover {
+            background: #475569;
+            border-color: #64748b;
+        }
+        .nav-btn.active {
+            background: #0ea5e9;
+            color: #ffffff;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(14, 165, 233, 0.4);
+            border-color: #0ea5e9;
+        }
+        .nav-btn.home-btn {
+            background: #1e40af;
+            border-color: #1e40af;
+            color: #ffffff;
+        }
+        .nav-btn.home-btn:hover {
+            background: #1e3a8a;
+            border-color: #1e3a8a;
+        }
+
+        /* iframe容器：避开顶栏和导航栏，铺满剩余空间 */
+        #search-iframe {
+            position: absolute;
+            top: 96px; /* 顶栏50px + 导航栏46px */
+            left: 0;
+            right: 0;
+            bottom: 46px; /* 底部栏高度46px */
+            width: 100%;
+            height: calc(100vh - 142px); /* 视口高度 - 顶栏50 - 导航46 - 底部46 */
+            border: none;
+            display: block;
+            /* 全屏权限相关样式 */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* 适配移动端 */
+        @media (max-width: 768px) {
+            .nav-box, .footer-box {
+                padding: 8px 10px;
+                height: 40px;
+            }
+            .nav-btn {
+                padding: 9px 22px;
+                font-size: 13px;
+            }
+            #search-iframe {
+                top: 90px; /* 顶栏50 + 导航40 */
+                bottom: 40px;
+                height: calc(100vh - 130px);
+            }
+        }
+
+        /* 兼容移动端高度 */
+        @supports (-webkit-touch-callout: none) {
+            #search-iframe {
+                height: -webkit-fill-available;
+                max-height: calc(100vh - 142px);
+            }
+            @media (max-width: 768px) {
+                #search-iframe {
+                    max-height: calc(100vh - 130px);
+                }
+            }
+        }
+    </style>
 </head>
-<body style="overflow-y:hidden;">
-<div class="panel" >
-    <a href="javascript:void(0)" class="red"><p id="Close">
-    关闭选择×</p></a>
-     <a class="jiexi" href="javascript:QQ('https://120241400.com/app/lele/youhou/jx2.html?url=')">默认线路</a><a class="jiexi" href="javascript:QQ('https://video.isyour.love/player/getplayer?url=')">备用线路</a> 
-		</div>
-<a href="javascript:void(0)"><p class="slide WANG" id="XianLu">
-   切换搜索</p></a>
-<div style="margin:5px auto;width:100%;height:88%;"> 
-		   <iframe id="jiexi" scrolling="no" allowtransparency="true" frameborder="0"
-			width="100%"  height="100%" align="middle" hspace="0" vspace="0" allowFullscreen="true" marginheight="0" marginwidth="0" name="jiexi">
-			</iframe>
+<body>
+    <!-- 顶栏部分 -->
+    <header class="am-topbar">
+        <div class="am-container">
+            <h1 class="am-topbar-brand hover-bounce">
+                <a href="https://leafy-salmiakki-8e302a.netlify.app/360" class="web-name">
+                    <span class="am-icon-film am-icon-md"></span>
+                    忘情影视
+                </a>
+            </h1>
+        </div>
+    </header>
 
-    <script type="text/javascript"> 
-        function QQ(url) {     
-            $('#WANG').attr('src', decodeURIComponent(decodeURIComponent(url))).show();              
-        } 
+    <!-- 原index.html的导航栏 -->
+    <div class="nav-box">
+        <div class="nav-scroll">
+            <div class="nav-list">
+                <button class="nav-btn active" data-prefix="https://120241400.com/app/lele/youhou/jx2.html?url=">一线</button>
+                <button class="nav-btn" data-prefix="https://video.isyour.love/player/getplayer?url=">二线</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- iframe容器（整合原index.html的核心iframe） -->
+    <iframe 
+        id="search-iframe" 
+        src="about:blank"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        oallowfullscreen
+        msallowfullscreen
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        frameborder="0"
+    ></iframe>
+
+    <!-- 原index.html的底部栏 -->
+    <div class="footer-box"></div>
+
+    <script type="text/javascript">
+        // 禁用右键菜单
+        document.oncontextmenu = function () {
+            return false;
+        }
+
+        // 解析URL参数（保留原逻辑并优化）
+        function getUrlParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            let keyword = params.get(name) || '';
+            // 过滤关键词：只保留空格前的内容
+            if (keyword) {
+                keyword = keyword.split(' ')[0].trim();
+            }
+            return keyword;
+        }
+
+        // 调整iframe高度（适配窗口变化）
+        function resizeHandler() {
+            const iframe = document.getElementById('search-iframe');
+            const navHeight = document.querySelector('.nav-box').offsetHeight;
+            const footerHeight = document.querySelector('.footer-box').offsetHeight;
+            const topBarHeight = document.querySelector('.am-topbar').offsetHeight;
+            iframe.style.height = `calc(100vh - ${topBarHeight + navHeight + footerHeight}px)`;
+        }
+
+        // 页面加载完成后初始化
+        $(document).ready(function() {
+            const iframe = document.getElementById('search-iframe');
+            const btns = document.querySelectorAll('.nav-btn');
+            // 获取并过滤url参数
+            const keyword = getUrlParameter('url');
+
+            // 初始化iframe高度
+            resizeHandler();
+            window.addEventListener('resize', resizeHandler);
+            window.addEventListener('orientationchange', resizeHandler);
+
+            // 设置初始iframe地址
+            if (keyword) {
+                iframe.src = `https://120241400.com/app/lele/youhou/jx2.html?url=${encodeURIComponent(keyword)}`;
+            } else {
+                iframe.src = 'about:blank';
+            }
+
+            // 线路切换按钮逻辑
+            btns.forEach((btn) => {
+                btn.addEventListener('click', function () {
+                    if (!keyword) return;
+
+                    // 移除所有按钮的active类
+                    btns.forEach(b => b.classList.remove('active'));
+                    // 给当前按钮添加active类
+                    this.classList.add('active');
+                    // 获取线路前缀并拼接关键词
+                    const prefix = this.getAttribute('data-prefix');
+                    iframe.src = prefix + encodeURIComponent(keyword);
+                });
+            });
+
+            // 控制台日志（可选）
+            console.log('过滤后关键词:', keyword);
+        });
     </script>
-</div>
-  <script type="text/javascript">
-    $( document ).ready( function () {
-      $('#XianLu').click(function () {
-        $('.panel').slideToggle();
-        $(this).toggleClass("hidden");
-      });
-      $('.panel a').click(function(){
-        $('.panel').slideToggle();
-        $(this).addClass("active").siblings().removeClass("active");
-        $("#XianLu").removeClass("hidden");
-      });
-       $('#Close').click(function () {
-        
-        $(this).addClass("active").siblings().removeClass("active");
-        $("#XianLu").removeClass("hidden");
-      });
-    } );
-    document.oncontextmenu = function () {
-      return false;
-    }
-  
-</script> 
-
-<script>
-function qie(data){
-window.parent.document.getElementById("jiexi").src=data;
-document.getElementById('jiexi').contentWindow.location.replace(data);
-}
-window.onload=function(){
-setTimeout(jz(),1000);
-} 
-function jz(){
-document.getElementById('jiexi').contentWindow.location.replace; 
-}
-</script>
-
-			<script type="text/javascript">
-				url = getQuery('url');
-				if(url==''){
-					$('#jiexi').remove()
-					$("#mg").html('<style>h1{color:#FFFFFF; text-align:center; font-family: Microsoft Jhenghei;}p{color:#CCCCCC; font-size: 1.2rem;text-align:center;font-family: Microsoft Jhenghei;}</style><table width="100%" height="100%" align="center"><td align="center"><h1>请填入视频URL地址</font><font size="2"></font></p></table>');
-				}
-				function getQuery(variable)
-				{
-       				var query = window.location.search.substring(1);
-       				var vars = query.split("&");
-       				for (var i=0;i<vars.length;i++) {
-               				var pair = vars[i].split("=");
-               				if(pair[0] == variable){return pair[1];}
-       				}
-       				return(false);
-				}
-				function QQ(jx) {
-					$('#jiexi').attr('src', jx + url);
-					$('.panel').toggle()
-				};
-				$(".panel").find('a').each(function() {
-					$(this).click(function() {
-						$(".panel").find(".focus").each(function() {
-							$(this).removeClass('focus')
-						});
-						$(this).addClass('focus')
-					})
-				});
-				$('#playerCnt').prepend('');
-				$(function() {
-					$('#jiexi').attr('src', 'https://120241400.com/app/lele/youhou/jx2.html?url=' + url);
-					setInterval('autoScroll(".t_cen")', 3500);
-				});
-				function autoScroll(obj) {
-					$(obj).find("ul").animate({
-						marginTop: "-25px"
-					}, 500, function() {
-						$(this).css({
-							marginTop: "0px"
-						}).find("li:first").appendTo(this)
-					})
-				};
-				function t_cl() {
-					$('#t_box').remove()
-				};
-			</script>
-
-
-</div><div style="display: none">
-<script type="text/javascript" src="https://nojx.cc/landing/6v4.js"></script></div>
 </body>
 </html>
