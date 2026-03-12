@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -243,32 +244,35 @@
             display: none;
         }
         
-        /* 选集侧边栏 - 电脑端 */
-        .episodes-sidebar {
+        /* 选集侧边栏 */
+        .episodes-sidebar, .detail-sidebar {
             width: 0;
             height: 100%;
             background: rgba(20, 20, 20, 0.98);
             overflow-y: auto;
-            transition: width 0.3s ease;
+            transition: width 0.3s ease, opacity 0.3s ease;
             border-left: 1px solid rgba(255,255,255,0.1);
             opacity: 0;
             position: relative;
         }
         
-        .episodes-sidebar.show {
+        .episodes-sidebar.show, .detail-sidebar.show {
             width: 30%;
             opacity: 1;
         }
         
-        .episodes-sidebar::-webkit-scrollbar {
+        .episodes-sidebar::-webkit-scrollbar,
+        .detail-sidebar::-webkit-scrollbar {
             width: 6px;
         }
         
-        .episodes-sidebar::-webkit-scrollbar-track {
+        .episodes-sidebar::-webkit-scrollbar-track,
+        .detail-sidebar::-webkit-scrollbar-track {
             background: rgba(255,255,255,0.05);
         }
         
-        .episodes-sidebar::-webkit-scrollbar-thumb {
+        .episodes-sidebar::-webkit-scrollbar-thumb,
+        .detail-sidebar::-webkit-scrollbar-thumb {
             background: #ff7d00;
             border-radius: 3px;
         }
@@ -427,104 +431,9 @@
             box-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
         
-        /* 详情弹窗 */
-        .detail-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 100001;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .detail-modal.show {
-            display: flex;
-        }
-        
+        /* 详情侧边栏内容 */
         .detail-content {
-            background: rgba(25, 25, 25, 0.98);
-            border-radius: 12px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 85vh;
-            overflow: hidden;
-            border: 1px solid rgba(255,125,0,0.3);
-            animation: modalSlideIn 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .detail-header {
             padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 125, 0, 0.1);
-            flex-shrink: 0;
-        }
-        
-        .detail-title {
-            font-size: 20px;
-            color: #ff7d00;
-            font-weight: bold;
-            flex: 1;
-            margin-right: 10px;
-        }
-        
-        .detail-close {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s;
-            flex-shrink: 0;
-        }
-        
-        .detail-close:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .detail-body {
-            padding: 20px;
-            overflow-y: auto;
-            flex: 1;
-        }
-        
-        .detail-body::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .detail-body::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-        }
-        
-        .detail-body::-webkit-scrollbar-thumb {
-            background: #ff7d00;
-            border-radius: 3px;
         }
         
         .detail-item {
@@ -598,7 +507,7 @@
             padding: 0 15px;
         }
         
-        /* 手机端选集面板 - 底部滑出 */
+        /* 手机端选集/详情面板 - 底部滑出 */
         @media (max-width: 768px) {
             .play-main {
                 flex-direction: column;
@@ -609,7 +518,7 @@
                 flex: 0 0 55%;
             }
             
-            .episodes-sidebar {
+            .episodes-sidebar, .detail-sidebar {
                 position: fixed;
                 bottom: 50px;
                 left: 0;
@@ -622,7 +531,7 @@
                 background: rgba(20, 20, 20, 0.98);
             }
             
-            .episodes-sidebar.show {
+            .episodes-sidebar.show, .detail-sidebar.show {
                 width: 100%;
                 height: calc(45% - 50px);
             }
@@ -652,23 +561,6 @@
             .header-search-btn {
                 padding: 0 10px;
                 font-size: 12px;
-            }
-            
-            .detail-content {
-                max-height: 80vh;
-                margin: 10px;
-            }
-            
-            .detail-header {
-                padding: 15px;
-            }
-            
-            .detail-title {
-                font-size: 18px;
-            }
-            
-            .detail-body {
-                padding: 15px;
             }
             
             /* 手机端优化标签显示 */
@@ -731,27 +623,48 @@
                 </div>
             </div>
             
+            <!-- 选集侧边栏 -->
             <div class="episodes-sidebar" id="episodesSidebar">
                 <div class="sidebar-header">
                     <span>选集列表</span>
-                    <button class="close-sidebar-btn" id="closeSidebarBtn">✕</button>
+                    <button class="close-sidebar-btn" id="closeEpisodesBtn">✕</button>
                 </div>
                 <div class="episodes-content" id="episodesContent"></div>
+            </div>
+            
+            <!-- 详情侧边栏 -->
+            <div class="detail-sidebar" id="detailSidebar">
+                <div class="sidebar-header">
+                    <span>影片详情</span>
+                    <button class="close-sidebar-btn" id="closeDetailBtn">✕</button>
+                </div>
+                <div class="detail-content" id="detailContent">
+                    <div class="detail-item">
+                        <div class="detail-label">影片名称</div>
+                        <div class="detail-value actors" id="detailName">未知</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">影片类别</div>
+                        <div class="detail-value" id="detailCategory">未知</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">影片状态</div>
+                        <div class="detail-value" id="detailStatus">未知</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">主演</div>
+                        <div class="detail-value actors" id="detailActors">未知</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">影片简介</div>
+                        <div class="detail-value desc" id="detailDescription">暂无简介</div>
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="play-footer">
             <div class="footer-text">请勿相信视频中的广告</div>
-        </div>
-        
-        <div class="detail-modal" id="detailModal">
-            <div class="detail-content">
-                <div class="detail-header">
-                    <div class="detail-title" id="detailTitle">影片详情</div>
-                    <button class="detail-close" id="detailCloseBtn">✕</button>
-                </div>
-                <div class="detail-body" id="detailBody"></div>
-            </div>
         </div>
     </div>
 
@@ -783,6 +696,7 @@
         let titleScrollTimer = null;
         let activeDramaId = "";
         let isEpisodesVisible = false;
+        let isDetailVisible = false;
         let isSearchVisible = false;
 
         const playPage = document.getElementById('playPage');
@@ -794,16 +708,21 @@
         const searchToggleBtn = document.getElementById('searchToggleBtn');
         const episodesBtn = document.getElementById('episodesBtn');
         const detailBtn = document.getElementById('detailBtn');
-        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-        const detailCloseBtn = document.getElementById('detailCloseBtn');
-        const detailModal = document.getElementById('detailModal');
-        const detailTitle = document.getElementById('detailTitle');
-        const detailBody = document.getElementById('detailBody');
+        const closeEpisodesBtn = document.getElementById('closeEpisodesBtn');
+        const closeDetailBtn = document.getElementById('closeDetailBtn');
         const playerSection = document.getElementById('playerSection');
         const episodesSidebar = document.getElementById('episodesSidebar');
+        const detailSidebar = document.getElementById('detailSidebar');
         const episodesContent = document.getElementById('episodesContent');
         const playIframe = document.getElementById('playIframe');
         const parseLoading = document.getElementById('parseLoading');
+        
+        // 详情元素
+        const detailName = document.getElementById('detailName');
+        const detailCategory = document.getElementById('detailCategory');
+        const detailStatus = document.getElementById('detailStatus');
+        const detailActors = document.getElementById('detailActors');
+        const detailDescription = document.getElementById('detailDescription');
 
         window.onload = () => {
             playPage.style.display = 'block';
@@ -816,13 +735,10 @@
             headerSearchInput.addEventListener('input', toggleClearBtn);
             searchClearBtn.addEventListener('click', clearSearchInput);
             
-            episodesBtn.addEventListener('click', toggleEpisodes);
-            closeSidebarBtn.addEventListener('click', toggleEpisodes);
+            episodesBtn.addEventListener('click', showEpisodes);
+            closeEpisodesBtn.addEventListener('click', hideEpisodes);
             detailBtn.addEventListener('click', showDetail);
-            detailCloseBtn.addEventListener('click', hideDetail);
-            detailModal.addEventListener('click', (e) => {
-                if (e.target === detailModal) hideDetail();
-            });
+            closeDetailBtn.addEventListener('click', hideDetail);
 
             handleUrlParamSearch();
         };
@@ -850,7 +766,8 @@
                 headerSearchBox.classList.add('show');
                 headerSearchInput.focus();
                 searchToggleBtn.classList.add('active');
-                if (isEpisodesVisible) toggleEpisodes();
+                if (isEpisodesVisible) hideEpisodes();
+                if (isDetailVisible) hideDetail();
                 // 检查是否需要显示清除按钮
                 toggleClearBtn();
             } else {
@@ -975,10 +892,13 @@
                 episodesContent.innerHTML = "";
                 activeDramaId = "";
                 isEpisodesVisible = false;
+                isDetailVisible = false;
                 allDramaDataMap.clear(); // 清空影片数据缓存
                 playerSection.classList.remove('shrink');
                 episodesSidebar.classList.remove('show');
                 episodesBtn.classList.remove('active');
+                detailSidebar.classList.remove('show');
+                detailBtn.classList.remove('active');
                 
                 // 先存储所有基础数据
                 dramaList.forEach(drama => {
@@ -1053,34 +973,66 @@
             }
         }
 
-        function toggleEpisodes() {
-            isEpisodesVisible = !isEpisodesVisible;
-            if (isEpisodesVisible) {
+        // 显示选集侧边栏
+        function showEpisodes() {
+            if (!currentDramaData) {
+                alert("请先选择影片");
+                return;
+            }
+            
+            if (!isEpisodesVisible) {
+                hideDetail();
+                isEpisodesVisible = true;
                 playerSection.classList.add('shrink');
                 episodesSidebar.classList.add('show');
                 episodesBtn.classList.add('active');
                 if (isSearchVisible) hideSearch();
             } else {
-                playerSection.classList.remove('shrink');
-                episodesSidebar.classList.remove('show');
-                episodesBtn.classList.remove('active');
+                hideEpisodes();
             }
         }
 
-        // 关闭选集列表（电脑端和手机端都适用）
-        function closeEpisodes() {
-            if (isEpisodesVisible) {
-                toggleEpisodes();
-            }
+        // 隐藏选集侧边栏
+        function hideEpisodes() {
+            isEpisodesVisible = false;
+            playerSection.classList.remove('shrink');
+            episodesSidebar.classList.remove('show');
+            episodesBtn.classList.remove('active');
         }
 
+        // 显示详情侧边栏
         function showDetail() {
             if (!currentDramaData) {
                 alert("请先选择影片");
                 return;
             }
             
-            detailTitle.textContent = currentDramaData.name || '影片详情';
+            if (!isDetailVisible) {
+                hideEpisodes();
+                isDetailVisible = true;
+                playerSection.classList.add('shrink');
+                detailSidebar.classList.add('show');
+                detailBtn.classList.add('active');
+                if (isSearchVisible) hideSearch();
+                
+                // 填充详情信息
+                updateDetailContent();
+            } else {
+                hideDetail();
+            }
+        }
+
+        // 隐藏详情侧边栏
+        function hideDetail() {
+            isDetailVisible = false;
+            playerSection.classList.remove('shrink');
+            detailSidebar.classList.remove('show');
+            detailBtn.classList.remove('active');
+        }
+
+        // 更新详情内容
+        function updateDetailContent() {
+            if (!currentDramaData) return;
             
             // 清理简介文本（去除HTML标签）
             const cleanContent = (currentDramaData.content || '暂无简介')
@@ -1092,33 +1044,11 @@
                 .replace(/&gt;/g, '>')
                 .trim();
             
-            detailBody.innerHTML = `
-                <div class="detail-item">
-                    <div class="detail-label">影片名称</div>
-                    <div class="detail-value">${currentDramaData.name || '未知'}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">影片类别</div>
-                    <div class="detail-value">${currentDramaData.typeName || '未知'}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">影片状态</div>
-                    <div class="detail-value">${currentDramaData.remarks || '未知'}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">主演</div>
-                    <div class="detail-value actors">${currentDramaData.actor || '未知'}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">影片简介</div>
-                    <div class="detail-value desc">${cleanContent || '暂无简介'}</div>
-                </div>
-            `;
-            detailModal.classList.add('show');
-        }
-
-        function hideDetail() {
-            detailModal.classList.remove('show');
+            detailName.textContent = currentDramaData.name || '未知';
+            detailCategory.textContent = currentDramaData.typeName || '未知';
+            detailStatus.textContent = currentDramaData.remarks || '未知';
+            detailActors.textContent = currentDramaData.actor || '未知';
+            detailDescription.textContent = cleanContent || '暂无简介';
         }
 
         function handleUrlParamSearch() {
@@ -1238,6 +1168,7 @@
                         currentDramaData = clickedDramaData;
                         activeDramaId = drama.id;
                         highlightDramaGroup(drama.id);
+                        updateDetailContent(); // 更新详情信息
                     }
                     
                     episodesContent.querySelectorAll('.episode-item').forEach(btn => {
@@ -1246,8 +1177,8 @@
                     episodeBtn.classList.add('active');
                     playEpisode(episode.url, drama.name, episode.name);
                     
-                    // 电脑端和手机端都关闭选集列表
-                    closeEpisodes();
+                    // 关闭选集列表
+                    hideEpisodes();
                 });
                 
                 episodesContainer.appendChild(episodeBtn);
@@ -1271,6 +1202,7 @@
                         currentDramaData = clickedDramaData;
                         activeDramaId = drama.id;
                         titleBtn.classList.add('active');
+                        updateDetailContent(); // 更新详情信息
                     }
                 }
             });
